@@ -1,25 +1,19 @@
 # CTF记录
 ---
+
 开始时间 2019/10/17
-## 示例类型
-  ### 示例题目1 [xxxx(Doing), xxxxxx(Stuck)]
-  思路什么的写在这里
-  ```
-  代码什么的贴在这里
-  ```
-  
-  ### 示例题目2 [Solved][xxxxxx(Doing)]
-  ```
-  FLAG: flag{this_is_flag}
-  ```
-  思路什么的写在这里
-  记得添点图片
-  
-  
+
 ------------
+
 ## hackergame 2019
-### 信息安全2077
+### 信息安全2077 时间类
 haha 第一题我就🕊了，不愧是我
+一开始的思路没错改那个时间戳但是貌似 是burp改不行还是我burp有问题？。。。。
+
+来了来了，wp来了，中科大官方wp https://github.com/ustclug/hackergame2019-writeups?tdsourcetag=s_pctim_aiomsg
+
+### 达拉崩吧 调试类
+挺简单的，js文件很容易看出来变量v是关键，直接在买菜的时候改v就可以了
 
 ## bugkuctf
 ### web4
@@ -27,6 +21,7 @@ haha 第一题我就🕊了，不愧是我
 
 --------
 ### 文件包含漏洞
+---
 #### 本地包含
 进去后看到如下代码
  <?php
@@ -70,3 +65,7 @@ http://120.24.86.145:8003/index.php?hello=1);include $_POST['f'];//  （把后�
 BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82818482
 
 谈一谈php://filter的妙用 https://www.leavesongs.com/PENETRATION/php-filter-magic.html
+---
+### 调试类
+#### 点击100万次
+定位对应变量clicks，断电，在控制台赋值即可
