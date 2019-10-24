@@ -95,6 +95,6 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 2. 扫文件目录（备份提示）发现有index.php.bak
 3. 点击后发现要求下一个源码，看了源码后有几个点，首先是要绕过把key变成空字符，其次是要md5绕过
 
-$_SERVER['REQUEST_URI'] 的解释 https://baike.baidu.com/item/%24_SERVER/4897514
-parse_str函数缺陷 https://cloud.tencent.com/developer/article/1370529
-md5弱类型绕过 https://blog.csdn.net/dongyanwen6036/article/details/77658983
+- $_SERVER['REQUEST_URI'] 的解释 https://baike.baidu.com/item/%24_SERVER/4897514
+- parse_str函数缺陷 https://cloud.tencent.com/developer/article/1370529
+- md5弱类型绕过 https://blog.csdn.net/dongyanwen6036/article/details/77658983
