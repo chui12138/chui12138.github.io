@@ -98,3 +98,13 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 - $_SERVER['REQUEST_URI'] 的解释 https://baike.baidu.com/item/%24_SERVER/4897514
 - parse_str函数缺陷 https://cloud.tencent.com/developer/article/1370529
 - md5弱类型绕过 https://blog.csdn.net/dongyanwen6036/article/details/77658983
+
+---
+## XSS注入小游戏
+这个系列的题目都是要你实现网站弹窗就可以了
+### LEVEL3
+问题抽象：双引号和尖括号被实体化，<变成`&lt;`   >变成`&gt;` 加了htmlspecialchars函数处理
+解决方法：htmlspecialchars函数默认不过滤单引号，既然尖括号已经被实体化了，就不能再额外创造`<script></script>`标签了，直接利用`<input name=keyword  value=''>`标签本身，在这个标签里面注入`<input name=keyword value='' onclick='window.alert()'>`
+### LEVEL5
+问题抽象：html中所有事件都是以o开头，现在如果有on同时出现就会加一个_在on之间。想像之前那样调用html时间来弹窗会被改成o_n
+解决方法：
