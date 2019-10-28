@@ -103,6 +103,10 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 ---
 ## XSS注入小游戏
 这个系列的题目都是要你实现网站弹窗就可以了
+
+该系列答案 https://blog.csdn.net/dyw_666666/article/details/82803118
+
+XSS注入别人的总结 https://blog.csdn.net/qq_29277155/article/details/51320064
 ### LEVEL3
 问题抽象：双引号和尖括号被实体化，<变成`&lt;`   >变成`&gt;` 加了htmlspecialchars函数处理
 
@@ -110,4 +114,12 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 ### LEVEL5
 问题抽象：它在`<`script 和 onclick 中加入了下划线，html中所有事件都是以o开头，现在如果有on同时出现就会加一个_在on之间。想像之前那样调用html时间来弹窗会被改成o_n
 
-解决方法：考虑下用链接（href），即在链接中调用js。`"><a href="javascript:οnclick=alert()">xss</a>`，之后会多出一个链接显示在网页上，是链接语句被解析出来的结果，点击链接后就会调用JavaScript。
+解决方法：考虑下用链接（href），即在链接中调用js。`"><a href="javascript:οnclick=alert()">xss</a>`，之后会多出一个链接显示在网页上，是链接语句被解析出来的结果，点击链接后就会调用JavaScript。解释：`<a href="javascript:;">我的大学</a>`
+`javascript:` 是一个伪协议
+`javascript:`是表示在触发`<a>`默认动作时，执行一段JavaScript代码，而 `javascript:;` 表示什么都不执行，这样点击`<a>`时就没有任何反应。
+
+`href="javascript:;"`就是去掉a标签的默认行为，跟`href="javascript:void(0)"`是一样的
+
+void 是JavaScript 的一个运算符，`void(0)`就是什么都不做的意思。
+
+待做：先看完 https://www.jianshu.com/p/cfdf1747d30e
