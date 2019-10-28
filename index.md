@@ -94,6 +94,7 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 1. 点击网址后可以看到一串16进制字符串，初步判断可以是base16或者md5
 2. 扫文件目录（备份提示）发现有index.php.bak
 3. 点击后发现要求下一个源码，看了源码后有几个点，首先是要绕过把key变成空字符，其次是要md5绕过
+4. 双写绕过的要求是字符串会被替换位空字符串
 
 - $_SERVER['REQUEST_URI'] 的解释 https://baike.baidu.com/item/%24_SERVER/4897514
 - parse_str函数缺陷 https://cloud.tencent.com/developer/article/1370529
@@ -104,7 +105,9 @@ BugkuCTF-web-本地包含 https://blog.csdn.net/huangming1644/article/details/82
 这个系列的题目都是要你实现网站弹窗就可以了
 ### LEVEL3
 问题抽象：双引号和尖括号被实体化，<变成`&lt;`   >变成`&gt;` 加了htmlspecialchars函数处理
+
 解决方法：htmlspecialchars函数默认不过滤单引号，既然尖括号已经被实体化了，就不能再额外创造`<script></script>`标签了，直接利用`<input name=keyword  value=''>`标签本身，在这个标签里面注入`<input name=keyword value='' onclick='window.alert()'>`
 ### LEVEL5
-问题抽象：html中所有事件都是以o开头，现在如果有on同时出现就会加一个_在on之间。想像之前那样调用html时间来弹窗会被改成o_n
-解决方法：
+问题抽象：它在`<`script 和 onclick 中加入了下划线，html中所有事件都是以o开头，现在如果有on同时出现就会加一个_在on之间。想像之前那样调用html时间来弹窗会被改成o_n
+
+解决方法：考虑下用链接（href），即在链接中调用js。`"><a href="javascript:οnclick=alert()">xss</a>`，之后会多出一个链接显示在网页上，是链接语句被解析出来的结果，点击链接后就会调用JavaScript。
